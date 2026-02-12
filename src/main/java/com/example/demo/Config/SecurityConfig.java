@@ -43,6 +43,20 @@ public class SecurityConfig {
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
+    @Bean
+public CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration config = new CorsConfiguration();
+
+    config.setAllowedOrigins(List.of("https://crud-frontend-yb8t.vercel.app"));
+    config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+    config.setAllowedHeaders(List.of("*"));
+    config.setAllowCredentials(true);
+
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", config);
+
+    return source;
+}
 
     // Main security filter chain configuration
     @Bean
@@ -53,18 +67,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
 
                 // Configures CORS settings
-                .cors(cors -> cors.configurationSource(request -> {
-                    CorsConfiguration config = new CorsConfiguration();
-                    // Allows requests from the specified frontend origin
-                    config.addAllowedOrigin("https://crud-frontend-yb8t.vercel.app");
-                    // Allows all HTTP methods (GET, POST, PUT, DELETE, etc.)
-                    config.addAllowedMethod("*");
-                    // Allows all headers in requests
-                    config.addAllowedHeader("*");
-                    // Allows cookies and authentication credentials
-                    config.setAllowCredentials(true);
-                    return config;
-                }))
+               .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
                 // Configures authorization rules for HTTP requests
                 .authorizeHttpRequests(auth -> auth
