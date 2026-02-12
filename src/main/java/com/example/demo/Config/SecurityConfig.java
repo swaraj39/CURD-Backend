@@ -57,7 +57,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration config = new CorsConfiguration();
                     // Allows requests from the specified frontend origin
-                    config.addAllowedOrigin("https://crud-frontend-yb8t.vercel.app/");
+                    config.addAllowedOrigin("http://localhost:3004/");
                     // Allows all HTTP methods (GET, POST, PUT, DELETE, etc.)
                     config.addAllowedMethod("*");
                     // Allows all headers in requests
