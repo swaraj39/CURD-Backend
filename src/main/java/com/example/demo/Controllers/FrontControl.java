@@ -19,7 +19,7 @@ import com.example.demo.Entity.Users;
 import com.example.demo.Repository.UserRepo;
 import com.example.demo.Repository.UsersRepo;
 @RestController
-@CrossOrigin(origins = "http://localhost:3003", allowCredentials = "true")
+@CrossOrigin(origins = "https://crud-frontend-yb8t.vercel.app", allowCredentials = "true")
 public class FrontControl {
 
     @Autowired
